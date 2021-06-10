@@ -2,6 +2,14 @@ const express = require('express')
 const todolist = express.Router();
 const client = require("../db")
 
+const isAuthenticated = (req, res, next) => {
+    if (req.session.currentUser) {
+        return next()
+    } else {
+        res.redirect('/sessions/login')
+    }
+}
+
 todolist.get('/', async(req, res) => {
     try {
         const allTasks = await client.query("SELECT * FROM todolist;")
