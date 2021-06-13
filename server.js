@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const session = require('express-session')
 const client = require('./db')
-const PORT = 3000 || 5000;
+const PORT = 5432 || 5000;
 const dotenv = require('dotenv')
 dotenv.config();
 
