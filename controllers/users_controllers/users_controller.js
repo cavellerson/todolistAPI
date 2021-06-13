@@ -8,9 +8,15 @@ users.post('/create', async(req,res) => {
 
         req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
 
-        const createUser = await client.query("INSERT INTO usernames (username, password) VALUES ($1,$2) RETURNING *",[req.body.username, req.body.password])
+        const queryUser = await client.query("SELECT * FROM usernames WHERE username = $1", [req.body.username])
 
-        res.json(createUser["rows"][0])
+        if (queryUser["rows"]) {
+            res.send("Username is already taken")
+        } else {
+            const createUser = await client.query("INSERT INTO usernames (username, password) VALUES ($1,$2) RETURNING *",[req.body.username, req.body.password])
+            res.send("Username created!")
+        }
+
     } catch (err) {
         console.error(err)
     }

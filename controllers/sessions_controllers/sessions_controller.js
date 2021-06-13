@@ -24,8 +24,6 @@ sessions.post('/login', async(req, res) => {
         } else {
             res.redirect('/login')
         }
-
-
     } catch (err) {
         console.error(err)
     }
