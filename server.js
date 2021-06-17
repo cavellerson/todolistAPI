@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const session = require('express-session')
 const client = require('./db')
-const PORT = 5432 || 5000;
+const PORT = 3000;
 const dotenv = require('dotenv')
 dotenv.config();
 
@@ -24,6 +24,10 @@ app.use('/session', sessionsController)
 
 const usersController = require('./controllers/users_controllers/users_controller.js')
 app.use('/users', usersController)
+
+app.get('/', (req, res) => {
+	res.redirect('/todolist')
+})
 
 app.listen(PORT, () => {
     console.log(`Listening on Port ${PORT}`);
