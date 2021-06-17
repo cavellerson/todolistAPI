@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express();
-const session = require('express-session')
+// const session = require('express-session')
 const client = require('./db')
 const PORT = 3000;
 const dotenv = require('dotenv')
@@ -19,11 +19,11 @@ app.use(
 const todolistsController = require('./controllers/todolist_controller.js')
 app.use('/todolist', todolistsController)
 
-const sessionsController = require('./controllers/sessions_controllers/sessions_controller.js')
-app.use('/session', sessionsController)
-
-const usersController = require('./controllers/users_controllers/users_controller.js')
-app.use('/users', usersController)
+// const sessionsController = require('./controllers/sessions_controllers/sessions_controller.js')
+// app.use('/session', sessionsController)
+//
+// const usersController = require('./controllers/users_controllers/users_controller.js')
+// app.use('/users', usersController)
 
 app.get('/', (req, res) => {
 	res.redirect('/todolist')
