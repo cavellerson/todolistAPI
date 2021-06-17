@@ -8,13 +8,13 @@ dotenv.config();
 
 app.use(express.json()); // allows access to req.body
 app.use(express.static('public'))
-app.use(
-	session({
-		secret: process.env.SECRET,
-		resave: false,
-		saveUninitialized: false,
-	})
-)
+// app.use(
+// 	session({
+// 		secret: process.env.SECRET,
+// 		resave: false,
+// 		saveUninitialized: false,
+// 	})
+// )
 
 const todolistsController = require('./controllers/todolist_controller.js')
 app.use('/todolist', todolistsController)
