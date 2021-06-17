@@ -1,6 +1,8 @@
 const express = require('express')
 const todolist = express.Router();
 const client = require("../db")
+const cors = require('cors')
+
 
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
@@ -10,7 +12,9 @@ const isAuthenticated = (req, res, next) => {
     }
 }
 
-todolist.get('/', async(req, res) => {
+todolist.use(cors())
+
+todolist.get('/', async(req, res, next) => {
     try {
         const allTasks = await client.query("SELECT * FROM todolist;")
         console.log(allTasks["rows"]);
@@ -23,7 +27,7 @@ todolist.get('/', async(req, res) => {
 
 })
 
-todolist.post('/', (req, res) => {
+todolist.post('/', (req, res, next) => {
 
         const description = req.body.description;
         const username = req.body.username;
@@ -35,7 +39,7 @@ todolist.post('/', (req, res) => {
 
 })
 
-todolist.get('/task/:taskNumber', (req, res) => {
+todolist.get('/task/:taskNumber', (req, res, next) => {
 
         const taskNumber = req.params.taskNumber;
 
@@ -44,14 +48,14 @@ todolist.get('/task/:taskNumber', (req, res) => {
 
 })
 
-todolist.delete('/delete/:taskNumber', (req, res) => {
+todolist.delete('/delete/:taskNumber', (req, res, next) => {
         const taskNumber = req.params.taskNumber
         const specificTask = client.query("DELETE FROM todolist WHERE task_id = $1;", [taskNumber])
         res.json(specificTask["rows"])
 
 })
 
-todolist.put('/edit/:taskNumber', async(req, res) => {
+todolist.put('/edit/:taskNumber', async(req, res, next) => {
     try {
         const description = req.body.description
         const completed = req.body.completed
