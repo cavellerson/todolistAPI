@@ -26,7 +26,6 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "nodemon": "^2.0.7",
-    "pg": "^8.6.0",
-    "sessions": "*"
+    "pg": "^8.6.0"
   }
 }
