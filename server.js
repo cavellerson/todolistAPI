@@ -26,7 +26,7 @@ app.use('/todolist', todolistsController)
 // app.use('/users', usersController)
 
 app.get('/', (req, res) => {
-	res.redirect('/todolist')
+	res.send("hello world")
 })
 
 app.listen(PORT, () => {
