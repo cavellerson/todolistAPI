@@ -30,7 +30,7 @@ const usersController = require('./controllers/users_controllers/users_controlle
 app.use('/users', usersController)
 
 app.get('/', (req, res, next) => {
-	res.send("hello world")
+	res.send("GET /todolist , POST /todolist description, username, completed, GET /todolist/task/:taskNumber , DELETE /todolist/delete/:taskNumber, PUT /todolist/edit/:taskNumber")
 })
 
 app.listen(PORT, () => {
